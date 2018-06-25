@@ -53,7 +53,7 @@ with open ('water_usage_dataset.csv', 'r') as dat:
                 break
             if datNew[1] != meter_ID:
                 tempCul = float(datNew[4])-float(datNew[5])
-                 
+            
             dic[datNew[3]] = '{0}'.format(float(datNew[4])-tempCul) # datNew[4]은 현재 누적 tempCul은 전일 누적    
             tempCul = float(datNew[4])
 
@@ -80,4 +80,7 @@ with open ('water_usage_dataset.csv', 'r') as dat:
         
         with open('water_usage_dataset_new.csv', 'a') as fileNew:
             fileNew.write(oneLine)
+
+        if dat.readline() == '': #종료조건
+            break
 

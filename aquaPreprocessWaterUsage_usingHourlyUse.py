@@ -33,7 +33,7 @@ with open ('water_usage_dataset.csv', 'r') as dat:
         break
 
     #unableUsage: 어느정도의 사용량까지가 노이즈가 아닌지
-    unableUsage = 10
+    #unableUsage = 10
     
     while True:
     
@@ -67,8 +67,8 @@ with open ('water_usage_dataset.csv', 'r') as dat:
 
         dic = copy.deepcopy(trueDic)  #다음 것으로 넘어가기 위함. 넘어가면서 0시 사라지면 안 되니까
 
-        if float(datNew[5]) > unableUsage: #unableUsage
-                datNew[5] = '0'
+        #if float(datNew[5]) > unableUsage: #unableUsage
+        #        datNew[5] = '0'
 
         dic[datNew[3]] = datNew[5]
 
@@ -77,5 +77,6 @@ with open ('water_usage_dataset.csv', 'r') as dat:
         with open('water_usage_dataset_new.csv', 'a') as fileNew:
             fileNew.write(oneLine)
 
-
+        if dat.readline() == '': #종료조건
+            break
         
