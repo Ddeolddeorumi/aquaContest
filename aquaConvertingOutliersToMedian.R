@@ -79,6 +79,11 @@ putMedianIn = function(usageDatInfo, criterionHigher, criterionLower = 0)
 }
 
 #1201 5445
-usageDatInfoGeneral = putMedianIn(usageDatInfoGeneral,1)
-usageDatInfoSchool = putMedianIn(usageDatInfoSchool,1)
-usageDatInfoHome = putMedianIn(usageDatInfoHome,1)
+#usageDatInfoGeneral = putMedianIn(usageDatInfoGeneral,1)
+#usageDatInfoSchool = putMedianIn(usageDatInfoSchool,1)
+#usageDatInfoHome = putMedianIn(usageDatInfoHome,1)
+
+# ?write.csv
+# write.csv(usageDatInfoGeneral, file = "usageDatInfoGeneral.csv")
+# write.csv(usageDatInfoSchool, file = "usageDatInfoSchool.csv")
+# write.csv(usageDatInfoHome, file = "usageDatInfoHome.csv")
