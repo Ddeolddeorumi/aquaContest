@@ -47,7 +47,6 @@ putMedianIn = function(usageDatInfo, criterionHigher, criterionLower = 0)
 {
   x = usageDatInfo
   x[,-c(3:26)] = 0
-  dim(x)
   
   matX = matrix(0, dim(x)[1],dim(x)[2])
   for ( i in 1:dim(x)[1])
