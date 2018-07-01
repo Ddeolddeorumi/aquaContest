@@ -13,7 +13,7 @@ with open ('water_usage_dataset.csv', 'r') as dat:
         header = ','.join(header) + '\n'
         with open('water_usage_dataset_new.csv', 'w') as fileNew:
             fileNew.write(header)
-        #print(header)
+        print(header)
         break #header 만들기 각 열의 이름
 
 
@@ -31,10 +31,10 @@ with open ('water_usage_dataset.csv', 'r') as dat:
         date = datNew[2]
         meter_ID = datNew[1]
         tempCul = float(datNew[4])-float(datNew[5])
-        #print(datNew)
+        print(datNew)
         break
 
-    #n = 0 #제약조건 
+    
     while True:
     
         oneLine = [datNew[1],datNew[2]]
@@ -45,23 +45,16 @@ with open ('water_usage_dataset.csv', 'r') as dat:
             datNew = line.replace('"','')
             datNew = datNew.replace('\n','')
             datNew = datNew.split(sep=',')
-
-            #n += 1 #제약조건 
             
             if datNew[2] == 'NA':
                 continue
-
-            if datNew[1] != meter_ID:
-                tempCul = float(datNew[4])-float(datNew[5])
-                meter_ID = datNew[1]
-                
             if datNew[2] != date:
                 date = datNew[2]
                 break
-
+            if datNew[1] != meter_ID:
+                tempCul = float(datNew[4])-float(datNew[5])
             
-            dic[datNew[3]] = '{0}'.format(float(datNew[4])-tempCul) # datNew[4]은 현재 누적 tempCul은 전일 누적
-            
+            dic[datNew[3]] = '{0}'.format(float(datNew[4])-tempCul) # datNew[4]은 현재 누적 tempCul은 전일 누적    
             tempCul = float(datNew[4])
 
             #if datNew[2] == '20161201' or datNew[2] == '20161130':   #뭐가 잘못된 건지 확인하기 위한 코드 하단 코드도 동일
@@ -72,14 +65,14 @@ with open ('water_usage_dataset.csv', 'r') as dat:
         for i in range(24):
             oneLine.append(dic['{0}'.format(i)])
 
-        #if datNew[2] == '20161203': ####전체 돌리려면 이거 주석처리해야함
-        #    break
+        if datNew[2] == '20161203': ####전체 돌리려면 이거 주석처리해야함
+            break
 
         dic = copy.deepcopy(trueDic)  #다음 것으로 넘어가기 위함. 넘어가면서 0시 사라지면 안 되니까
 
         #if datNew[2] == '20161201' or datNew[2] == '20161130':
         #    print(datNew)
-        
+
         dic[datNew[3]] = '{0}'.format(float(datNew[4])-tempCul)
         tempCul = float(datNew[4])
 
@@ -88,8 +81,6 @@ with open ('water_usage_dataset.csv', 'r') as dat:
         with open('water_usage_dataset_new.csv', 'a') as fileNew:
             fileNew.write(oneLine)
 
-        if line == '': #종료조건
+        if dat.readline() == '': #종료조건
             break
 
-        #if n > 400: #제약조건 
-        #    break #제약조건 
