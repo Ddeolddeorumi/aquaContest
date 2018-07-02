@@ -36,12 +36,21 @@ with open ('water_usage_dataset.csv', 'r') as dat:
 
     #n = 0 #제약조건 
     while True:
-    
+
+        lineTemp = True
+        
         oneLine = [datNew[1],datNew[2]]
 
         #하루에 대한 것    
 
-        for line in dat:
+        while True:
+
+            line = dat.readline()
+
+            if line == '':
+                lineTemp = False
+                break
+            
             datNew = line.replace('"','')
             datNew = datNew.replace('\n','')
             datNew = datNew.split(sep=',')
@@ -64,6 +73,11 @@ with open ('water_usage_dataset.csv', 'r') as dat:
             
             tempCul = float(datNew[4])
 
+            
+            
+        if not lineTemp: #종료조건
+            break
+            
             #if datNew[2] == '20161201' or datNew[2] == '20161130':   #뭐가 잘못된 건지 확인하기 위한 코드 하단 코드도 동일
             #    print(datNew)
             
@@ -87,9 +101,8 @@ with open ('water_usage_dataset.csv', 'r') as dat:
         
         with open('water_usage_dataset_new.csv', 'a') as fileNew:
             fileNew.write(oneLine)
+        
 
-        if line == '': #종료조건
-            break
 
-        #if n > 400: #제약조건 
+        #if n > 400: #제약조건
         #    break #제약조건 
